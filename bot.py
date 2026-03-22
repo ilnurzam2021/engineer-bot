@@ -16,12 +16,9 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 import pytz
 
-# Импорты из библиотеки maxapi
+# Импорты из библиотеки maxapi (без User)
 from maxapi import Bot, Dispatcher
-from maxapi.types import (
-    MessageCreated, BotStarted, Command,
-    User
-)
+from maxapi.types import MessageCreated, BotStarted, Command
 
 # ==================== КОНФИГУРАЦИЯ ====================
 load_dotenv()
@@ -165,7 +162,8 @@ def update_reminder_flag(task_id: int, field: str):
 
 @dp.bot_started()
 async def on_bot_started(event: BotStarted):
-    user: User = event.user
+    # Получаем данные пользователя из event (без импорта User)
+    user = event.user
     user_id = user.user_id
     username = getattr(user, 'username', None)
     full_name = getattr(user, 'first_name', '') + ' ' + getattr(user, 'last_name', '')
