@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --no-cache-dir --timeout 100 -i https://mirror.yandex.ru/pypi/simple/ -r requirements.txt
+RUN pip install --no-cache-dir --timeout 100 -r requirements.txt
 COPY . .
 CMD ["python", "bot.py"]
